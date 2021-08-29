@@ -2,7 +2,8 @@ let inputBox = document.querySelector(".todo-input");
 let addButton = document.querySelector(".add-todo");
 let todoList = document.querySelector(".todo-list");
 
-// 
+// addEventListener adds an event listener over the event.
+// When the event is dispatched, the callback function is set.
 document.addEventListener("DOMContentLoaded",getToDo);
 addButton.addEventListener("click",addToDo);
 todoList.addEventListener("click",deleteToDo);
@@ -16,12 +17,9 @@ function addToDo(e){
     todoitem.innerText=inputBox.value;
     todoitem.classList.add("toDo-Item");
 
-
-
     todoDiv.appendChild(todoitem);
-    
-    inputBox.value = "";
 
+    inputBox.value = "";
 
     var deleteButton = document.createElement("button");
     deleteButton.classList.add("Delete-todo");
@@ -32,10 +30,7 @@ function addToDo(e){
     completeButton.classList.add("Completed-todo");
     completeButton.innerText="Completed";
      todoDiv.appendChild(completeButton);
-
-
-
-
+    saveToDo(todoitem.innerText);
     todoList.appendChild(todoDiv);
 }
 
@@ -43,16 +38,73 @@ function deleteToDo(e){
     var item = e.target;
     if(item.classList[0]==="Delete-todo"){
         var todo = item.parentElement;
+        removeToDo(todo);
         todo.remove();
+    }
+    if(item.classList[0]==="Completed-todo"){
+        var todo = item.parentElement;
+        todo.classList.toggle("completed");
     }
 
 }
 
-
-
-function getToDo()
-{
+function saveToDo(newtodo){
+    let todos = getToDosFromStorage();
     
+    // todo is pushed to the array.
+    todos.push(newtodo);
+    // todos array is stringified and the value is stored in the localstorage.
+    let a =  JSON.stringify(todos);
+    localStorage.setItem("todos", a);
+}
+
+function removeToDo(todo){
+    let todos = getToDosFromStorage();
+    
+    let todoText = todo.children[0].innerText;
+    let todoIndex = todos.indexOf(todoText);
+    // splices the desired value from the required index of todos array. 
+    todos.splice(todoIndex, 1);
+    let b = JSON.stringify(todos);
+    localStorage.setItem("todos",b);   
+}
+
+function getToDo(){
+    let todos = getToDosFromStorage();
+    todos.forEach((todo)=>{
+    var todoDiv = document.createElement("div");
+    todoDiv.classList.add("ToDo");
+    var todoitem = document.createElement("li");
+    todoitem.innerText=todo;
+    todoitem.classList.add("toDo-Item");
+    todoDiv.appendChild(todoitem);
+    var deleteButton = document.createElement("button");
+    deleteButton.classList.add("Delete-todo");
+    deleteButton.innerText="Delete";
+    todoDiv.appendChild(deleteButton);
+    var completeButton = document.createElement("button");
+    completeButton.classList.add("Completed-todo");
+    completeButton.innerText="Completed";
+     todoDiv.appendChild(completeButton);
+    todoList.appendChild(todoDiv);
+    })
+    
+    
+}
+
+function getToDosFromStorage(){
+    let todos;
+    // gets todos from localstorage
+    let storedToDos = localStorage.getItem("todos");
+    // if todos is not there in localstorage,an empty array is assigned to todos.
+    // else the todos from localstorage is assigned to the array.
+    if(storedToDos===null){
+        todos = [];
+    }
+    else{
+        todos=JSON.parse(storedToDos);
+    }
+    return todos;
 }
 
 
@@ -64,5 +116,13 @@ function getToDo()
 //         console.log("hello");
 //     }
 // }
-// console.log(student.array1[4]);
+// console.log(JSON.stringify(student));
 // student.SayHello();
+
+// let num = [1,2,3,4,5,6,7,8,9,10];
+// for(let i=0;i<num.length;i++){
+//     if(num[i] == 10){
+//         console.log(i);
+//     }
+
+// }

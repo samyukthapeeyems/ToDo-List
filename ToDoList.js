@@ -22,14 +22,16 @@ function addToDo(e){
     inputBox.value = "";
 
     var deleteButton = document.createElement("button");
+    
+    deleteButton.innerHTML=`<i class="fas fa-trash"></i>`;
     deleteButton.classList.add("Delete-todo");
-    deleteButton.innerText="Delete";
     todoDiv.appendChild(deleteButton);
 
     var completeButton = document.createElement("button");
-    completeButton.classList.add("Completed-todo");
-    completeButton.innerText="Completed";
-     todoDiv.appendChild(completeButton);
+    
+    completeButton.innerHTML=`<i class="fas fa-check"></i>`;
+    deleteButton.classList.add("Delete-todo");
+    todoDiv.appendChild(completeButton);
     saveToDo(todoitem.innerText);
     todoList.appendChild(todoDiv);
 }
@@ -79,12 +81,14 @@ function getToDo(){
     todoitem.classList.add("toDo-Item");
     todoDiv.appendChild(todoitem);
     var deleteButton = document.createElement("button");
+    
+    deleteButton.innerHTML=`<i class="fas fa-trash"></i>`;
     deleteButton.classList.add("Delete-todo");
-    deleteButton.innerText="Delete";
     todoDiv.appendChild(deleteButton);
+
     var completeButton = document.createElement("button");
+    completeButton.innerHTML=`<i class="fas fa-check"></i>`;
     completeButton.classList.add("Completed-todo");
-    completeButton.innerText="Completed";
      todoDiv.appendChild(completeButton);
     todoList.appendChild(todoDiv);
     })

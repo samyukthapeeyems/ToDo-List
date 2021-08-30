@@ -11,29 +11,7 @@ todoList.addEventListener("click",deleteToDo);
 function addToDo(e){
     //to prevent default action
      e.preventDefault();
-    var todoDiv = document.createElement("div");
-    todoDiv.classList.add("ToDo");
-    var todoitem = document.createElement("li");
-    todoitem.innerText=inputBox.value;
-    todoitem.classList.add("toDo-Item");
-
-    todoDiv.appendChild(todoitem);
-
-    inputBox.value = "";
-
-    var deleteButton = document.createElement("button");
-    
-    deleteButton.innerHTML=`<i class="fas fa-trash"></i>`;
-    deleteButton.classList.add("Delete-todo");
-    todoDiv.appendChild(deleteButton);
-
-    var completeButton = document.createElement("button");
-    
-    completeButton.innerHTML=`<i class="fas fa-check"></i>`;
-    deleteButton.classList.add("Delete-todo");
-    todoDiv.appendChild(completeButton);
-    saveToDo(todoitem.innerText);
-    todoList.appendChild(todoDiv);
+    render(inputBox.value);
 }
 
 function deleteToDo(e){
@@ -71,26 +49,38 @@ function removeToDo(todo){
     localStorage.setItem("todos",b);   
 }
 
-function getToDo(){
-    let todos = getToDosFromStorage();
-    todos.forEach((todo)=>{
+function render(a){
     var todoDiv = document.createElement("div");
     todoDiv.classList.add("ToDo");
     var todoitem = document.createElement("li");
-    todoitem.innerText=todo;
+    todoitem.innerText= a;
     todoitem.classList.add("toDo-Item");
+
     todoDiv.appendChild(todoitem);
+    if(inputBox.value!==""){
+        saveToDo(todoitem.innerText);
+        inputBox.value = "";
+    }
+
     var deleteButton = document.createElement("button");
     
-    deleteButton.innerHTML=`<i class="fas fa-trash"></i>`;
+    deleteButton.innerHTML="Delete";
     deleteButton.classList.add("Delete-todo");
     todoDiv.appendChild(deleteButton);
 
     var completeButton = document.createElement("button");
-    completeButton.innerHTML=`<i class="fas fa-check"></i>`;
+    
+    completeButton.innerHTML="Completed";
     completeButton.classList.add("Completed-todo");
-     todoDiv.appendChild(completeButton);
+    todoDiv.appendChild(completeButton);
+    
     todoList.appendChild(todoDiv);
+}
+
+function getToDo(){
+    let todos = getToDosFromStorage();
+    todos.forEach((todo)=>{
+    render(todo);
     })
     
     

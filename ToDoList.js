@@ -64,13 +64,13 @@ function render(a){
 
     var deleteButton = document.createElement("button");
     
-    deleteButton.innerHTML="Delete";
+    deleteButton.innerHTML=`<i class="fas fa-trash"></i>`;
     deleteButton.classList.add("Delete-todo");
     todoDiv.appendChild(deleteButton);
 
     var completeButton = document.createElement("button");
     
-    completeButton.innerHTML="Completed";
+    completeButton.innerHTML=`<i class="fas fa-check"></i>`;
     completeButton.classList.add("Completed-todo");
     todoDiv.appendChild(completeButton);
     

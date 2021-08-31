@@ -8,6 +8,26 @@ body{
     min-height: 100vh;
 }
 
+.todo-input,.add-todo{
+    font-family: Poppins;
+    font-size: 1.5rem;
+    margin: 0.5rem;
+}
+.todo-input{
+    padding-left: 1rem;
+}
+.add-todo{
+    color: rgb(7, 99, 136);
+    background-color: white;
+    padding-inline: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+}
+.add-todo:hover{
+    transition: background-color, 0.5s;
+    background-color: rgb(144, 213, 240);
+}
+
 form{
     display: flex;
     justify-content: center;
@@ -23,13 +43,15 @@ form{
 
 .todo-list{
     list-style: none;
+    list-style-type: disc;
+    color: rgb(25, 25, 65);
 }
 
 .ToDo{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin: 0.5rem;
 }
 
@@ -37,8 +59,37 @@ form{
     flex: 1;
 }
 
-/* .Delete-todo,.Completed-todo{
+.Delete-todo,.Completed-todo{
+    background-color: white;
     font-size: 1rem;
+    margin-left: 1rem;
     border: none;
     padding: 1rem;
-}  */
+    border-radius: 0.5rem;
+} 
+.Delete-todo{
+    color: rgb(228, 74, 74);
+}
+.Delete-todo:hover{
+    transition: background-color, 0.5s;
+    background-color: rgb(247, 189, 189);
+}
+.Completed-todo{
+    color: rgb(6, 175, 82);
+}
+.Completed-todo:hover{
+    transition: background-color, 0.5s;
+    background-color: rgb(167, 245, 199);
+}
+.todo-input{
+    border: 0;
+    transition: border-color, 0.3s;
+    border-bottom: 0.1rem solid rgb(3, 40, 75);
+    outline: 0;
+    background: transparent;
+    padding: 0.5rem;
+}
+.todo-input:focus{
+    padding-bottom: 1rem;
+    border-width: 0.1rem;
+}
